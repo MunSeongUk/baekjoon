@@ -1,35 +1,36 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
-	private static int T;
-	private static int N;
-	
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-//		Scanner sc = new Scanner(new File("input.txt"));
+		int u = sc.nextInt();
+		int v = sc.nextInt();
+		int gcd = getGCD(u, v);
+		int lcm = u * v / gcd;
 		
-		int u = sc.nextInt(), v = sc.nextInt();
-		int gcd = euclid(u, v);
-		System.out.println(gcd + " " + (u * v / gcd));
+		System.out.println(gcd + " "  + lcm);
 		
 		sc.close();
 	}
 	
-	private static int euclid(int u, int v) {
-		int t = 0;
+	public static int getGCD(int u, int v) {
+		while (u != 0) {
+			if (u < v) {
+				int t = u;
+				u = v;
+				v = t;
+			}
+			
+			u = u - v;
+		}
 		
-		while (v > 0) {
-			t = u % v;
+		return v;
+	}
+	
+	public static int getGCD2(int u, int v) {
+		while (v != 0) {
+			int t = u % v;
 			u = v;
 			v = t;
 		}
