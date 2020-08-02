@@ -36,12 +36,12 @@ public class Main {
 		
 		tree.root = ((1 + N) * N/2) - root;
 		
-		tree.calcLevel(tree.root, 1, false);
+		tree.calcLevel(tree.root, 1);
 		int maxWidth = 1;
 		int minLevel = 1;
 		
 		for (int i = 2; i <= tree.maxLevel; ++i) {
-			int begin = tree.nodes[i][0] != 0 ? tree.nodes[i][0] : tree.nodes[i][1];
+			int begin = tree.nodes[i][0];
 			int end = tree.nodes[i][1];
 			int width = end - begin + 1;
 			
@@ -85,7 +85,7 @@ class Tree {
 		}
 	}
 	
-	public void calcLevel(int index, int level, boolean dir) {
+	public void calcLevel(int index, int level) {
 		if (index == 0) {
 			return;
 		}
@@ -94,13 +94,12 @@ class Tree {
 			maxLevel = level;
 		}
 		
-		calcLevel(indiceOfChild[index][0], level + 1, false);
+		calcLevel(indiceOfChild[index][0], level + 1);
 		positions[index] = position++;
 		if (nodes[level][0] == 0) {
 			nodes[level][0] = positions[index];
 		}
-		
 		nodes[level][1] = positions[index];
-		calcLevel(indiceOfChild[index][1], level + 1, true);
+		calcLevel(indiceOfChild[index][1], level + 1);
 	}
 }
